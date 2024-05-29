@@ -1,0 +1,35 @@
+.home {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.home__center {
+  width: 95%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 10px;
+}
+
+@media(min-width: 500px) {
+  .home__center {
+    width: 100%;
+    padding-right: 10px;
+  }
+}
+
+@media(min-width: 768px) {
+  .home__center {
+    padding-right: 0;
+  }
+}
+
+@media(min-width: 1024px) {
+  .home {
+    max-width: unset;
+  }
+}
