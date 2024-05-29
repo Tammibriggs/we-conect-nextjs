@@ -1,6 +1,7 @@
 import { Server } from "socket.io";
 import connectDB from "../../server/utils/mongodb";
 import Message from "../../server/models/Message";
+import User from "@/server/models/User";
 
 let users = [];
 

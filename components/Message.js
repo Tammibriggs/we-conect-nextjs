@@ -9,7 +9,7 @@ import {
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { useLazyGetUserByIdQuery } from "../redux/services/user";
-import { io } from "socket.io-client";
+import { socket } from "@/utils/socket";
 
 export default function Message() {
   const [search, setSearch] = useState(false);
@@ -18,9 +18,7 @@ export default function Message() {
   const [searchResults, setSearchResults] = useState([]);
   const [conversationMembers, setConversationMembers] = useState([]);
   const [conversationMember, setConversationMember] = useState({});
-  const socket = useRef();
   const [onlineUsers, setOnlineUser] = useState([]);
-  const [count, setCount] = useState(null);
 
   const userData = useSelector((state) => state.auth);
   const { data: conversations } = useGetConversationsQuery();
@@ -28,19 +26,17 @@ export default function Message() {
   const [getUser] = useLazyGetUserByIdQuery();
 
   useEffect(() => {
-    socketInitializer();
-  }, []);
-
-  const socketInitializer = async () => {
-    await fetch("/api/socket");
-    socket.current = io({ path: "/api/socket" });
-  };
-
-  useEffect(() => {
-    socket.current?.emit("addUser", userData.user?._id);
-    socket.current?.on("getUsers", (users) => {
-      setOnlineUser(users);
-    });
+    if (socket?.connected) {
+      socket?.emit("addUser", userData.user?._id);
+      socket?.on("getUsers", (users) => {
+        setOnlineUser(users);
+      });
+    }
+    return () => {
+      socket?.off("getUsers", (users) => {
+        setOnlineUser(users);
+      });
+    };
   }, [userData.user]);
 
   useEffect(() => {

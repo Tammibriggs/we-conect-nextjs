@@ -38,16 +38,21 @@ export default function Chat({
   }, [messages]);
 
   useEffect(() => {
-    socket.current.on("getMessage", (data) => {
-      if (data.senderId === conversationMember._id)
-        setMessages([...messages, { sender: data.senderId, text: data.text }]);
-    });
+    socket.on("getMessage", getMessage);
+    return () => {
+      socket?.off("getMessage", getMessage);
+    };
   }, [messages, conversationMember._id, socket]);
+
+  const getMessage = (data) => {
+    if (data.senderId === conversationMember._id)
+      setMessages([...messages, { sender: data.senderId, text: data.text }]);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (inputRef.current.innerText) {
-      socket.current.emit("sendMessage", {
+      socket.emit("sendMessage", {
         senderId: currentUser._id,
         receiverId: conversationMember._id,
         text: inputRef.current.innerText,

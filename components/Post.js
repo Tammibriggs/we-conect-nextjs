@@ -146,7 +146,7 @@ const Post = ({ id, userId }) => {
       >
         <div className="bg-white p-5 rounded-md">
           <TrashSimple size={30} className="text-slate-800" />
-          <p className="text-lg font-semibold">Delete Item</p>
+          <p className="text-lg font-semibold">Delete Post</p>
           <p className="text-sm text-slate-500">
             Are you sure you want to delete this post
           </p>
