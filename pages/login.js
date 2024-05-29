@@ -59,7 +59,7 @@ export default function Login() {
         )}
         <div>
           <span style={{ fontSize: "12px" }}>
-            Don't have an account{" "}
+            Don&apos;t have an account{" "}
             <Link href="/register" className={style.authForm__link}>
               Register
             </Link>

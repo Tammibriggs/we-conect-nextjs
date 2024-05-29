@@ -95,6 +95,7 @@ export default function Chat({
         {messages.map((message) => (
           <span
             ref={scrollRef}
+            key={message._id}
             className={`${
               message.sender === currentUser._id ? style.chat__myMessage : ""
             }`}
