@@ -33,7 +33,7 @@
   position: relative;
 }
 
-.rightSide .search__results {
+.rightSide .searchResults {
   position: absolute;
   background: white;
   right: 0;
