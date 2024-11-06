@@ -13,22 +13,24 @@
   justify-content: space-between;
 }
 
-.post__head > img {
-  width: 17px;
-  height: 17px;
-  cursor: pointer;
-}
-
 .post__head div > img {
   width: 50px;
   height: 50px;
   border-radius: 100%;
   object-fit: cover;
+  cursor: pointer;
 }
 
 .post__posterName {
   font-weight: 600;
   line-height: 25px;
+  color: black;
+  text-decoration: none;
+}
+
+.post__posterName:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .post__posterName + span {
@@ -46,14 +48,19 @@
 .post > img {
   width: 100%;
   max-height: 500px;
-  object-fit: cover;
+  height: auto;
   border-radius: 0.5rem;
+  object-fit: cover;
 }
+
+/* .postImage img {
+  border-radius: 0.5rem;
+} */
 
 .postReact {
   display: flex;
   align-items: flex-start;
-  gap: .25rem;
+  gap: 0.25rem;
 }
 
 .postReact > span {
@@ -61,14 +68,14 @@
   align-items: center;
   gap: 5px;
   background: #f3f3f3;
-  padding: .35rem .5rem;
-  border-radius: .5rem;
+  padding: 0.35rem 0.5rem;
+  border-radius: 0.5rem;
   font-weight: 600;
   cursor: pointer;
 }
 
 .postReact img {
-  width: 1.25rem;
+  width: 20px;
 }
 
 .post__detail {
@@ -159,35 +166,25 @@
   color: var(--p-color1);
 }
 
-.post .post__modal {
-  padding: 0;
-  background-color: transparent;
-  width: fit-content;
-}
-
-.post__modal > div:nth-child(1) {
-  display: none;
-}
-
-.post__deleteModal { 
+.post .postModal {
+  max-width: 350px;
   background-color: white;
   border-radius: 10px;
   border: 1px solid gainsboro;
   box-shadow: 0 2px 4px gainsboro;
-  padding: 20px;
 }
 
-.post__deleteModal span {
+.postDelete span {
   display: block;
   font-size: 18px;
   margin-bottom: 10px;
 }
 
-.post__deleteModal div {
+.postDelete div {
   display: flex;
 }
 
-.post__deleteModal div button{
+/* .postDelete div button {
   width: 50%;
   height: 40px;
   border: none;
@@ -197,17 +194,38 @@
   justify-content: center;
   color: var(--p-color2);
   cursor: pointer;
-}
-
-.post__deleteModal div button:hover{
-  color: black;
-}
-
-.post__deleteModal div button:nth-child(2):hover{
-  color: rgb(245, 128, 128);
-}
-/* @media (min-width: 500px) {
-  .post {
-    border-radius: 10px;
-  }
 } */
+
+/* .postDelete div button:hover {
+  color: black;
+} */
+
+/* .postDelete div button:nth-child(2):hover {
+  color: ;
+} */
+
+.postDelete > div {
+  margin-top: 10px;
+}
+
+.postDeleteCloseBtn {
+  text-transform: none;
+  border-radius: 12px;
+  color: var(--p-color4);
+  width: fit-content;
+  margin-top: 10px;
+  margin-left: auto;
+}
+
+.postDeleteBtn {
+  text-transform: none;
+  border-radius: 12px;
+  margin-left: 8px;
+  background-color: #ef4444;
+  width: fit-content;
+  margin-top: 10px;
+}
+
+.postDeleteBtn:hover {
+  background-color: #dc2626;
+}

@@ -1,0 +1,101 @@
+.conversation {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.conversation:hover {
+  background-color: var(--p-color9);
+}
+
+.conversationActive {
+  background-color: var(--p-color8);
+}
+
+.profileContainer {
+  width: fit-content;
+  display: flex;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.profileImage {
+  border-radius: 100%;
+  object-fit: cover;
+  border: 1px solid var(--p-color7);
+}
+
+.conversationDetails {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  height: 100%;
+  justify-content: center;
+  overflow: hidden;
+  width: 100%;
+}
+
+.conversationDetail {
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+}
+
+.conversationDetail h3 {
+  font-weight: 600;
+  font-size: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-right: 5px;
+}
+
+.conversationDetail span {
+  color: var(--p-color4);
+  font-size: 14px;
+}
+
+.messagePreview {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.messageText {
+  display: flex;
+  flex: 1;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.unreadMessage {
+  color: #000000; /* Tailwind text-black */
+}
+
+.readMessage {
+  color: #475569; /* Tailwind text-slate-600 */
+}
+
+.unreadCount {
+  width: 1rem;
+  height: 1rem;
+  text-align: center;
+  font-weight: 600;
+  background-color: #3b82f6; /* Assuming primary is blue */
+  color: #ffffff;
+  border-radius: 50%;
+  font-size: 0.75rem;
+}
+
+.messageContent {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-right: 0.25rem;
+}

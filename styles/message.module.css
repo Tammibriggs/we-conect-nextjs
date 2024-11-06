@@ -1,128 +1,32 @@
-.message__cont {
-  width: 100%;
-}
-
 .message {
-  background-color: white;
-  border-radius: 10px;
-  padding: 10px;
-  height: 100%;
-  max-width: 600px;
-}
-
-.message__noMessage h3 {
-  text-align: left;
-}
-
-.message__noMessage img {
-  width: 100%;
-  margin-top: 50px;
-}
-
-.message__noMessage button {
-  padding: 5px 20px;
-  font-size: 14px;
-  margin: 0 auto;
-  border: 2px solid transparent;
-}
-
-.message__searchPal {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 20px;
-  cursor: pointer;
-  margin-top: 10px;
-  position: relative;
-}
-
-.message__searchPalOnline {
-  position: absolute;
-  padding: 4px;
-  background: #0bed0b;
-  border-radius: 100%;
-  top: 5px;
-  right: 7px;
-}
-
-.message__searchPal > div {
-  display: flex;
-  width: 90%;
-  align-items: center;
-}
-
-.message__searchPal > div > div:nth-child(2) {
-  flex: 1;
-  overflow: hidden;
-}
-
-.message__searchContainer {
-  height: 100%;
+  height: fit-content;
   margin-bottom: 10px;
-}
-
-.message__searchResult {
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
-  scrollbar-width: thin;
-  padding: 0 5px;
-  height: 88%;
 }
 
-.message__searchResult::-webkit-scrollbar {
-  width: 5px;
+.message span:nth-child(1) {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--p-color4);
 }
 
-.message__searchResult span > svg {
-  font-size: 20px;
-}
-
-.message__searchPalInfo > span:nth-child(1) {
-  display: block;
-  font-weight: 550;
-  font-size: 16px;
-}
-
-.message__searchPalInfo > span:nth-child(2) {
+.message span:nth-child(2) {
+  padding: 10px;
+  background-color: var(--p-color8);
+  max-width: 80%;
+  width: fit-content;
   font-size: 14px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  height: 18px;
+  border-radius: 10px;
   display: block;
-  color: var(--p-color3);
-  width: calc(100% - 30px);
-  max-width: 300px;  
 }
 
-.message__searchPalImage {
-  width: 40px;
-  height: 40px;
-  vertical-align: middle;
-  margin-right: 5px;
-  object-fit: cover;
-  border-radius: 100%;
-  flex-shrink: 0;
-  border: 1px solid rgba(226 232 240);
+.myMessage {
+  align-items: end;
 }
 
-.rightSide .message__searchResult .noButton__search {
-  background-color: white;
-  border: 1px solid var(--p-color7);
-}
-
-.rightSide .message__searchPalOnline {
-  top: 1px;
-  left: 2px;
-}
-
-@media(min-width:850px) {
-  .message {
-    height: 430px;
-  }
-
-  .message__cont {
-    margin-top: 10px;
-  }
+.myMessage > span:nth-child(2) {
+  background-color: var(--p-color1);
+  max-width: 80%;
+  color: white;
 }

@@ -11,10 +11,17 @@
   border-bottom: 1px solid var(--p-color8);
 }
 
-.chat__head img{
+.chat__profile {
+  width: fit-content;
+  display: flex;
+  position: relative;
+  flex-shrink: 0;
+  margin-right: 5px;
+}
+
+.chat__profile img {
   width: 40px;
   height: 40px;
-  margin-right: 5px;
   border-radius: 100%;
 }
 
@@ -26,49 +33,26 @@
   font-weight: 550;
 }
 
-.chat__chats {
+.chat__messages {
   flex: 1;
-  overflow-y: scroll;
+  overflow-y: auto;
+  padding: 10px 0;
+  padding-right: 5px;
+  scrollbar-width: thin; /* Options: auto, thin, none */
+  scrollbar-color: var(--p-color6) var(--p-color9); /* thumb color and track color */
 }
 
-.chat__chats::-webkit-scrollbar {
-  display: none;
+.chat__messages::-webkit-scrollbar {
+  width: 8px;
 }
 
-.chat__chats {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+.chat__messages::-webkit-scrollbar-thumb {
+  background-color: var(--p-color6); /* Color of the scrollbar thumb */
+  border-radius: 4px; /* Roundness of the scrollbar thumb */
 }
 
-.chat__chats > span {
-  height: fit-content;
-  margin-bottom: 10px;
-  display: flex;
-  flex-direction: column;
-}
-
-.chat__myMessage {
-  align-items: end;
-}
-
-.chat .chat__myMessage > span:nth-child(2) {
-  background-color: var(--p-color1);
-  color: white;
-}
-
-.chat__chats > span span:nth-child(1) {
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--p-color4);
-}
-
-.chat__chats > span span:nth-child(2) {
-  padding: 10px;
-  background-color: var(--p-color8);
-  width: fit-content;
-  font-size: 14px;
-  border-radius: 10px;
-  display: block;
+.chat__messages::-webkit-scrollbar-track {
+  background: var(--p-color9); /* Color of the scrollbar track */
 }
 
 .chat form {
@@ -81,11 +65,16 @@
 
 .chat form button {
   background-color: var(--p-color1);
-  padding:5px 10px;
+  padding: 5px 10px;
+  height: 40px;
   border-radius: 10px;
   border: none;
   margin-left: 5px;
   align-self: end;
+}
+
+.chat form button:hover {
+  background-color: #2563eb;
 }
 
 .chat form button svg {
@@ -113,4 +102,13 @@
 .textarea[contenteditable]:empty::before {
   content: "Enter message";
   color: gray;
+}
+
+.loadingIconContainer {
+  text-align: center;
+}
+
+.loadingIcon {
+  margin-top: 10px;
+  color: var(--p-color1);
 }

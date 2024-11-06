@@ -1,0 +1,78 @@
+.chatContainer {
+  width: 100%;
+  border-radius: 10px;
+  background-color: white;
+  padding: 10px;
+  max-width: 600px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--p-color8);
+}
+
+.chatContainer h3 {
+  margin-bottom: 5px;
+}
+
+.noConversations {
+  width: 100%;
+  height: 75%;
+}
+
+.noConversations > div {
+  width: 100%;
+  height: 80%;
+  position: relative;
+}
+
+.noConversations img {
+  object-fit: contain;
+}
+
+.noConversations span {
+  display: block;
+  text-align: center;
+  font-weight: 400;
+  font-size: 18px;
+}
+
+.conversationList {
+  overflow: auto;
+}
+
+.message__searchPalOnline {
+  position: absolute;
+  padding: 4px;
+  background: #0bed0b;
+  border-radius: 100%;
+  top: 5px;
+  right: 7px;
+}
+
+.chatSearchResults {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  padding: 0 5px;
+  height: 88%;
+}
+
+.chatSearchResults h4 {
+  color: var(--p-color2);
+  font-weight: 500;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.rightSide .message__searchResult .noButton__search {
+  background-color: white;
+  border: 1px solid var(--p-color7);
+}
+
+@media (min-width: 850px) {
+  .chatContainer {
+    height: 450px;
+  }
+}

@@ -1,37 +1,33 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 body {
   margin: 0;
-  font-family:'Hanken Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: "Hanken Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
-  background-color: #f3f3f3;
+  background-color: var(--p-color9);
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
-:root{
-  --p-color1: rgb(19,113,235);
-  --p-color-gray1: hsl(213, 12%, 15%);
-  --p-color2: hsl(210, 10%, 23%);
-  --p-color3: hsl(210, 9%, 31%);
-  --p-color4: hsl(210, 7%, 56%);
-  --p-color5: hsl(210, 11%, 71%);
-  --p-color6: hsl(210, 14%, 83%);
-  --p-color7: hsl(210, 14%, 83%);
-  --p-color8: hsl(210, 16%, 93%);
-  --p-color9: hsl(210, 14%, 83%);
-  --p-color10: hsl(210, 17%, 98%);
+:root {
+  --p-color1: rgb(19, 113, 235);
+  --p-color-gray1: #111827;
+  --p-color2: #1f2937;
+  --p-color3: #374151;
+  --p-color4: #4b5563;
+  --p-color5: #6b7280;
+  --p-color6: #9ca3af;
+  --p-color7: #d1d5db;
+  --p-color8: #e5e7eb;
+  --p-color9: #f3f4f6;
+  --p-color10: #f9fafb;
 }
 
 :root {
@@ -45,14 +41,14 @@ code {
   --cardColor: rgba(255, 255, 255, 1);
   --buttonBg: linear-gradient(98.63deg, #f9a225 0%, #f95f35 100%);
   --inputColor: rgba(40, 52, 62, 0.07);
-  --photo: #4CB256;
-  --video: #4A4EB7;
-  --location: #EF5757;
-  --shedule: #E1AE4A;
+  --photo: #4cb256;
+  --video: #4a4eb7;
+  --location: #ef5757;
+  --shedule: #e1ae4a;
 }
 
 .mantine-Paper-root {
-  padding: 1rem .5rem;
+  padding: 1rem 0.5rem;
   border-radius: 1rem;
   flex: 1;
   max-width: 600px;
@@ -75,7 +71,8 @@ code {
 .app {
   display: flex;
   justify-content: center;
-  gap: .5rem;
+  gap: 0.5rem;
+  flex-direction: column;
 }
 
 .logo h1 {
@@ -96,22 +93,22 @@ code {
   margin: 0 auto;
 }
 
-.noButton__search {
+.noButtonSearch {
   display: flex;
   align-items: center;
   margin-bottom: 20px;
   border-radius: 10px;
   width: 100%;
-  height: 35px;
-  @apply bg-gray-100
+  height: 45px;
+  background-color: var(--p-color9);
 }
 
-.noButton__search > svg {
+.noButtonSearch > svg {
   margin-left: 5px;
   background-color: transparent;
 }
 
-.noButton__search input {
+.noButtonSearch input {
   padding: 0 5px;
   background-color: transparent;
   border: none;
@@ -128,7 +125,7 @@ code {
   text-align: left;
 }
 
-.noscroll { 
+.noscroll {
   overflow-y: hidden;
 }
 
@@ -147,14 +144,14 @@ code {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: .25rem .75rem;
+  padding: 0.25rem 0.75rem;
   color: white;
   border: none;
   background-color: var(--p-color1);
-  border-radius: .5rem;
+  border-radius: 0.5rem;
 }
 
-.button:hover{
+.button:hover {
   cursor: pointer;
   color: var(--p-color1);
   background: transparent;
@@ -167,9 +164,65 @@ code {
   background-color: var(--p-color5);
 }
 
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+.messages-hidden {
+  display: none;
+}
+
+.messages-flex {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @media (min-width: 1024px) {
   .app {
     width: 95%;
     margin: 0 auto;
   }
+}
+
+.loader {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: block;
+  margin: 15px auto;
+  position: relative;
+  background: var(--p-color9);
+  box-shadow: -24px 0 var(--p-color9), 24px 0 var(--p-color9);
+  box-sizing: border-box;
+  animation: shadowPulse 2s linear infinite;
+}
+
+@keyframes shadowPulse {
+  33% {
+    background: var(--p-color9);
+    box-shadow: -24px 0 var(--p-color1), 24px 0 var(--p-color9);
+  }
+  66% {
+    background: var(--p-color1);
+    box-shadow: -24px 0 var(--p-color9), 24px 0 var(--p-color9);
+  }
+  100% {
+    background: var(--p-color9);
+    box-shadow: -24px 0 var(--p-color9), 24px 0 var(--p-color1);
+  }
+}
+
+.loader--margin-top {
+  margin-top: 40px;
 }

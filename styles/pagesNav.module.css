@@ -5,7 +5,7 @@
   transition: transform 0.3s linear;
 }
 
-.pagesNav--hidden{
+.pagesNav--hidden {
   transform: translateY(50px);
 }
 
@@ -15,12 +15,16 @@
 
 .pagesNav__container {
   display: flex;
-  justify-content: space-around;
   align-items: center;
+}
+
+.pagesNavLinks {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex: 1;
+  padding: 1rem 0.25rem 0.25rem 0.25rem;
   background-color: #eaf3fc;
-  padding: 1rem .25rem .25rem .25rem;
-  height: 50px;
-  border-radius: 1rem;
 }
 
 .pagesNav__Icon {
@@ -50,10 +54,14 @@
 
 .addPost {
   display: flex;
-  border-radius: .75rem;
+  border-radius: 0.75rem;
   padding: 10px;
   background-color: var(--p-color1);
   color: white;
+}
+
+.addPost:hover {
+  background-color: #2563eb;
 }
 
 .search_modal {
@@ -69,7 +77,7 @@
   height: 40px;
 }
 
-@media(min-width: 500px) {
+@media (min-width: 500px) {
   .pageNavAlt {
     display: none;
     visibility: hidden;
@@ -79,27 +87,33 @@
     display: block;
   }
 
-  .pagesNav__container {
-    width: 50px;
-  }
-
-  .pagesNavVertical { 
+  .pagesNavVertical {
     position: relative;
     bottom: 0;
     right: 0;
     display: block;
     width: fit-content;
-    padding:  10px 20px;
+    padding: 10px 20px;
     background-color: white;
   }
 
-  .pagesNavVertical .pagesNav__container {
+  .pagesNav__container {
+    width: 50px;
     flex-direction: column;
     height: unset;
     gap: 30px;
     position: sticky;
     top: 20px;
-    background-color: rgb(234,243,252);
+  }
+
+  .pagesNavLinks {
+    gap: 30px;
+    flex-direction: column;
+    background-color: rgb(234, 243, 252);
+  }
+
+  .pagesNavSignOut {
+    color: var(--p-color3);
   }
 
   .pagesNavVertical .pagesNav__action svg {
@@ -107,13 +121,13 @@
   }
 }
 
-@media(min-width: 850px) {
+@media (min-width: 850px) {
   .remove {
     display: none;
   }
 }
 
-@media(min-width: 1024px) {
+@media (min-width: 1024px) {
   .pagesNavVertical {
     display: none;
   }

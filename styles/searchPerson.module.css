@@ -17,8 +17,10 @@
   cursor: pointer;
 }
 
-.noButton__search--mod {
-  @apply bg-gray-200 mb-[5px] h-10 border border-solid border-slate-300
+.noButtonSearchMod {
+  background-color: var(--p-color9);
+  margin-bottom: 5px;
+  border: 1px solid var(--p-color7);
 }
 
 .search__resultsPerson:hover {

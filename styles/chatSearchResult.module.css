@@ -1,0 +1,59 @@
+.chatsearchResult {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 5px;
+  gap: 8px;
+  overflow: hidden;
+}
+
+.chatsearchResult:hover {
+  background-color: var(--p-color9);
+}
+
+.profileContainer {
+  width: fit-content;
+  display: flex;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.profileImage {
+  border-radius: 100%;
+  object-fit: cover;
+  border: 1px solid var(--p-color7);
+}
+
+.onlineIndicator {
+  position: absolute;
+  padding: 5px;
+  border: 1px solid white;
+  background-color: #22c55e;
+  border-radius: 50%;
+  right: 0;
+  top: 4px;
+}
+
+.chatsearchResultInfo {
+  flex: 1;
+  overflow: hidden;
+}
+
+.chatsearchResultInfo h3 {
+  font-weight: 500;
+  font-size: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-right: 5px;
+}
+
+.chatsearchResultInfo p {
+  font-size: 14px;
+  color: var(--p-color3);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-right: 5px;
+}
