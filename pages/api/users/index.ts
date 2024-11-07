@@ -43,8 +43,8 @@ const getUser = async (req: CustomNextApiRequest, res: NextApiResponse) => {
   try {
     const userId = req.userId;
     const user = await User.findById(userId);
-    const { password, updatedAt, ...other } = user._doc;
-    res.status(200).json({ data: other });
+    const { password, isAdmin, updatedAt, ...other } = user._doc;
+    res.status(200).json(other);
   } catch (err) {
     res.status(500).json({ message: "Interanl Server Error" });
   }

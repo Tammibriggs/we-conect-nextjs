@@ -5,6 +5,10 @@ const ConversationSchema = new Schema(
     members: {
       type: Array,
     },
+    unReadMessagesCount: {
+      type: Number,
+      default: 0,
+    },
   },
   { timestamps: true }
 );

@@ -8,6 +8,7 @@ const search = async (req, res) => {
     const query = req.query.search;
 
     if (query) {
+      // Search for users that match the query using MongoDB full-text search
       users = await User.aggregate([
         {
           $search: {

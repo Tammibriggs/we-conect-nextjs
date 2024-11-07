@@ -95,3 +95,38 @@ type Share = {
   closeModal?: () => void;
   setNewPosts?: SetState<PostData[]>;
 };
+
+type Conversation = {
+  members: Array<string>;
+  unReadMessagesCount: number;
+  createdAt: string;
+  updatedAt: string;
+};
+
+type SearchForChatsResult = {
+  matchedChats: { conversationId: string; user: User }[];
+  morePeople: { user: User }[];
+};
+
+type ChatSearchResult = {
+  result: { conversationId?: string; user: User };
+};
+
+type ConversationData = {
+  unReadMessagesCount: number;
+  _id: string;
+  members: Array<string>;
+  createdAt: string;
+  updatedAt: string;
+  userName: string;
+  userProfilePic: string;
+  latestMessage: {
+    _id: string;
+    conversationId: strng;
+    sender: string;
+    text: string;
+    read: boolean;
+    createdAt: string;
+    updatedAt: string;
+  };
+};

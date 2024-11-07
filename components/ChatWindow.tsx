@@ -13,8 +13,8 @@ export default function Chat({
   setConversationMember,
   socket,
 }) {
-  const inputRef = useRef();
-  const scrollRef = useRef();
+  const inputRef = useRef<HTMLSpanElement>();
+  const scrollRef = useRef<HTMLSpanElement>();
 
   const [addMessage] = useAddMessageMutation();
   const [getMessages] = useLazyGetMessagesQuery();
@@ -30,11 +30,13 @@ export default function Chat({
   }, [conversationMember.conversationId, getMessages]);
 
   useEffect(() => {
-    scrollRef.current?.scrollIntoView({
-      behavior: "smooth",
-      block: "nearest",
-      inline: "start",
-    });
+    if (scrollRef.current) {
+      scrollRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "start",
+      });
+    }
   }, [messages]);
 
   useEffect(() => {
