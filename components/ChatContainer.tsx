@@ -42,7 +42,7 @@ export default function ChatContainer() {
   }, [fetchedConversations, dispatch]);
 
   useEffect(() => {
-    if (socket?.connected && user) {
+    if (socket && user) {
       socket.emit("addUser", user._id);
       socket.on("getUsers", (onlineUsers) => {
         dispatch(setOnlineUsers(onlineUsers));
@@ -57,7 +57,7 @@ export default function ChatContainer() {
   }, [sessionData, user, dispatch]);
 
   useEffect(() => {
-    if (socket?.connected) {
+    if (socket) {
       const updatedConversation = (conversation: ConversationData) => {
         if (conversations?.length) {
           const conversationIndex = conversations.findIndex(

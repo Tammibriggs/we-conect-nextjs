@@ -51,7 +51,6 @@ function ChatWindow({
 
   useEffect(() => {
     if (openedChatsMessages[conversation._id] && !isFirstScroll.current) {
-      console.log("reached");
       socket.emit("readMessages", {
         conversationId: conversation._id,
         userId: user._id,
@@ -62,7 +61,7 @@ function ChatWindow({
 
   // Mark messages as seen
   useEffect(() => {
-    if (socket?.connected) {
+    if (socket) {
       setLastMessageElementId("");
       const markMessagesAsSeen = (conversationId: string) => {
         if (openedChatsMessages[conversationId]) {
@@ -87,7 +86,7 @@ function ChatWindow({
 
   // Load first messages only when they are not already available. i.e When the chat window is first opened.
   useEffect(() => {
-    if (socket?.connected) {
+    if (socket) {
       if (conversation._id && !openedChatsMessages[conversation._id]?.length) {
         setIsLoadingFirstMessages(true);
         getMessages({
@@ -117,7 +116,7 @@ function ChatWindow({
   useEffect(() => {
     const messagesContainer = messagesRef.current;
     if (
-      socket?.connected &&
+      socket &&
       openedChatsMessages[conversation._id] !== undefined &&
       messagesContainer &&
       ((latestMessage && latestMessage.senderId === user._id) ||
@@ -161,7 +160,7 @@ function ChatWindow({
   // New messages might have not been seen if a users is scrolled to the top of the chat window.
   useEffect(() => {
     if (
-      socket?.connected &&
+      socket &&
       latestMessage &&
       latestMessage.senderId !== user._id &&
       !latestMessage.seen &&
@@ -217,7 +216,7 @@ function ChatWindow({
 
   // when a new message arrives, add it to the state and remove it from the message queue which will trigger the next message in the queue to be sent.
   useEffect(() => {
-    if (socket?.connected) {
+    if (socket) {
       const handleNewMessage = (message: MessageDoc) => {
         const updatedOpenedChatMessages = { ...openedChatsMessages };
 
