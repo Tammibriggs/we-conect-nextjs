@@ -123,7 +123,7 @@ const Share = ({ closeModal, setNewPosts }: Share) => {
                 type="file"
                 name="myImage"
                 ref={imageRef}
-                accept="image/*"
+                accept="image/png, image/gif, image/jpeg"
                 onChange={(e) => onImageChange(e, setImage)}
               />
             </div>

@@ -127,7 +127,6 @@ const SocketHandler = async (
       socket.on("addUser", (userId) => {
         onlineUsers[userId] = socket.id;
         io.emit("getUsers", onlineUsers);
-        socket;
       });
 
       socket.on("removeUser", (userId) => {
