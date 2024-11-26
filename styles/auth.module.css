@@ -53,3 +53,31 @@
 .authFormAlt {
   font-size: 14px;
 }
+
+.authGoogle {
+  border: 1px solid var(--p-color1); /* Assuming `border-primary` is #3498db */
+  text-transform: none; /* normal-case */
+  width: 100%; /* w-full */
+  color: var(--p-color1); /* text-blue-500 */
+  border-radius: 20px;
+  gap: 10px;
+}
+
+.authAlternative {
+  width: 100%;
+  text-align: center;
+}
+
+.authAlternative span {
+  position: relative;
+  z-index: 100;
+  background-color: white;
+  padding: 4px;
+  color: var(--p-color2);
+}
+
+.authAlternative hr {
+  position: relative;
+  bottom: 14px;
+  border: 1px solid var(--p-color9);
+}

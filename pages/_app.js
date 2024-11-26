@@ -5,6 +5,7 @@ import { useState } from "react";
 import "@mantine/core/styles.css";
 import "@/styles/globals.css";
 import { SessionProvider } from "next-auth/react";
+import MemoryUsage from "@/components/MemoryUsage";
 
 export default function App({
   Component,
@@ -22,6 +23,8 @@ export default function App({
               setModalOpened={setModalOpened}
               modalOpened={modalOpened}
             />
+            <MemoryUsage />
+
           </MantineProvider>
         </SessionProvider>
       </Providers>

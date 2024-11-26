@@ -5,7 +5,7 @@
   border-radius: 5px;
   padding: 5px;
   gap: 8px;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .chatsearchResult:hover {

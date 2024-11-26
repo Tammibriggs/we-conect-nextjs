@@ -2,11 +2,16 @@ import User from "@/server/models/User";
 import { connectDbWithoutHanlder } from "@/server/utils/mongodb";
 import { authShema } from "@/server/utils/yupSchemas";
 import CryptoJS from "crypto-js";
-import NextAuth from "next-auth";
+import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
 
-const authOptions = {
+const authOptions: NextAuthOptions = {
   providers: [
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    }),
     CredentialsProvider({
       credentials: {
         username: { label: "username", type: "text" },
@@ -63,8 +68,37 @@ const authOptions = {
     }),
   ],
   callbacks: {
-    async jwt({ token, user }) {
-      return { ...token, ...user };
+    async signIn({ user, account, profile }) {
+      try {
+        if (account?.provider === "google") {
+          const { name, image, id } = user;
+          await connectDbWithoutHanlder();
+          const userDoc = await User.findOne({ providerId: id });
+
+          if (!userDoc) {
+            await User.create({
+              username: name.split(" ")[0],
+              providerId: id,
+              profilePicture: {
+                url: image,
+              },
+              provider: account.provider,
+            });
+          }
+        }
+        return true;
+      } catch (err) {
+        return `/login?error=Unable to signIn`;
+      }
+    },
+    async jwt({ token, user, account }) {
+      let updatedUser = { ...user };
+
+      if (account?.provider === "google") {
+        updatedUser = (await User.findOne({ providerId: user.id }))._doc;
+      }
+
+      return { ...token, ...updatedUser };
     },
     async session({ session, token }) {
       const { iat, jti, exp, ...others } = token;
@@ -73,6 +107,9 @@ const authOptions = {
         user: others,
       };
     },
+  },
+  session: {
+    strategy: "jwt",
   },
   pages: {
     signIn: "/login",

@@ -13,7 +13,13 @@ type User = {
 };
 
 type UserSchema = Document &
-  User & { password: string; isAdmin: boolean; _doc?: any };
+  User & {
+    provider: string;
+    providerId: string;
+    password: string;
+    isAdmin: boolean;
+    _doc?: any;
+  };
 
 type UpdateUser = {
   username?: string;
@@ -127,6 +133,8 @@ type SearchForChatsResult = {
 
 type ChatSearchResult = {
   result: { conversationId?: string; user: User };
+  setCurrentConversationId: SetState<string>;
+  setQuery: SetState<string>;
 };
 
 type ConversationData = {

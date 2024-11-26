@@ -19,16 +19,21 @@ const newConversations = async (
       });
     }
 
-    const conversation = await Conversation.findOne({
-      members: { $in: [userId, receiverId] },
+    let conversation = await Conversation.findOne({
+      members: { $all: [userId, receiverId] },
     });
 
-    if (conversation) return res.status(200).json(conversation);
+    if (!conversation) {
+      conversation = await Conversation.create({
+        members: [userId, receiverId],
+      });
+    }
 
-    const newConversation = Conversation.create({
-      members: [userId, receiverId],
+    const updatedChatWithExtraFields = await updateChatWithExtraFields({
+      conversation: conversation._doc,
+      userId,
     });
-    res.status(200).json(newConversation);
+    res.status(200).json(updatedChatWithExtraFields);
   } catch (err) {
     res.status(500).json({ message: "Internal Server Error" });
   }

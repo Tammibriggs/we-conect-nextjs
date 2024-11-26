@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import style from "../styles/chatContainer.module.css";
 import ChatWindow from "./ChatWindow";
 import {
-  useCreateConversationMutation,
   useGetConversationsQuery,
   useLazySearchForChatQuery,
 } from "../redux/services/messaging";
@@ -19,7 +18,13 @@ import {
   setOnlineUsers,
 } from "@/redux/chatSlice";
 
-export default function ChatContainer() {
+export default function ChatContainer({
+  urlConversationId,
+  customStyle,
+}: {
+  urlConversationId?: string;
+  customStyle?: string;
+}) {
   const dispatch = useDispatch();
   const conversations = useSelector(selectConversations);
   const { data: sessionData } = useSession() as ClientSession;
@@ -28,12 +33,17 @@ export default function ChatContainer() {
   const [searchResults, setSearchResults] = useState<SearchForChatsResult>();
   const [query, setQuery] = useState("");
   const [currentConversationId, setCurrentConversationId] =
-    useState<string>("");
+    useState<string>(urlConversationId);
 
   const [searchForChat, result] = useLazySearchForChatQuery();
   const { data: fetchedConversations, isLoading: conversationsIsLoading } =
     useGetConversationsQuery(null);
-  const [createConversation] = useCreateConversationMutation();
+
+  useEffect(() => {
+    if (urlConversationId) {
+      setCurrentConversationId(urlConversationId);
+    }
+  }, [urlConversationId]);
 
   useEffect(() => {
     if (fetchedConversations?.length) {
@@ -94,7 +104,7 @@ export default function ChatContainer() {
     }, 1000);
 
     return () => clearTimeout(timer);
-  }, [query, handleSearch]);
+  }, [query]);
 
   async function handleSearch() {
     if (query) {
@@ -107,8 +117,15 @@ export default function ChatContainer() {
     }
   }
 
+  const getConversation = () => {
+    return conversations.find(
+      (conversation: ConversationData) =>
+        conversation._id === currentConversationId
+    );
+  };
+
   return (
-    <div className={style.chatContainer}>
+    <div className={`${style.chatContainer} ${customStyle}`}>
       {!currentConversationId ? (
         <>
           <h3>Messages</h3>
@@ -132,6 +149,7 @@ export default function ChatContainer() {
               ))}
             </div>
           ) : (
+            !query &&
             !conversationsIsLoading && (
               <div className={style.noConversations}>
                 <div>
@@ -145,31 +163,42 @@ export default function ChatContainer() {
           {query && searchResults && (
             <div className={style.chatSearchResults}>
               {searchResults.matchedChats?.map((result) => (
-                <ChatSearchResult key={result.user._id} result={result} />
+                <ChatSearchResult
+                  setQuery={setQuery}
+                  setCurrentConversationId={setCurrentConversationId}
+                  key={result.user._id}
+                  result={result}
+                />
               ))}
 
               {!!searchResults.morePeople.length && (
                 <>
                   <h4>More People</h4>
                   {searchResults.morePeople?.map((result) => (
-                    <ChatSearchResult key={result.user._id} result={result} />
+                    <ChatSearchResult
+                      setCurrentConversationId={setCurrentConversationId}
+                      setQuery={setQuery}
+                      key={result.user._id}
+                      result={result}
+                    />
                   ))}
                 </>
               )}
             </div>
           )}
 
-          {result.isLoading && <span className="loader"></span>}
+          {(result.isLoading || result.isFetching) && (
+            <span className="loader"></span>
+          )}
         </>
       ) : (
-        <ChatWindow
-          conversation={conversations.find(
-            (conversation: ConversationData) =>
-              conversation._id === currentConversationId
-          )}
-          socket={socket}
-          setCurrentConversationId={setCurrentConversationId}
-        />
+        getConversation() && (
+          <ChatWindow
+            conversation={getConversation()}
+            socket={socket}
+            setCurrentConversationId={setCurrentConversationId}
+          />
+        )
       )}
     </div>
   );

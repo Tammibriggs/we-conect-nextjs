@@ -10,7 +10,7 @@ import { selectChat, setOpenedChatsMessages } from "@/redux/chatSlice";
 import OnlineIndicator from "./OnlineIndicator";
 import { IconButton } from "@mui/material";
 import Message from "./Message";
-import { CircleNotch } from "@phosphor-icons/react";
+import { CaretLeft, CircleNotch } from "@phosphor-icons/react";
 
 function ChatWindow({
   conversation,
@@ -47,7 +47,7 @@ function ChatWindow({
       )[0];
     }
     return null;
-  }, [openedChatsMessages[conversation._id]]);
+  }, [openedChatsMessages[conversation?._id]]);
 
   useEffect(() => {
     if (openedChatsMessages[conversation._id] && !isFirstScroll.current) {
@@ -168,8 +168,6 @@ function ChatWindow({
     ) {
       const lastMessageElement = document.getElementById(lastMessageElementId);
       // Mark messages as read
-      console.log(lastMessageElementId);
-
       const observer = new IntersectionObserver(
         (entries) => {
           const [entry] = entries; // Get the first (and only) entry
@@ -391,9 +389,11 @@ function ChatWindow({
   return (
     <div className={style.chat}>
       <div className={style.chat__head}>
-        <span onClick={() => setCurrentConversationId("")}>
-          <KeyboardArrowLeft />
-        </span>
+        <CaretLeft
+          onClick={() => setCurrentConversationId("")}
+          size={25}
+          weight="bold"
+        />
         <div className={style.chat__profile}>
           <Image
             src={
@@ -415,12 +415,8 @@ function ChatWindow({
         onScroll={handleMessageListScroll}
         ref={messagesRef}
       >
-        {hasMoreMessages() && (
-          <div
-            className={`${style.loadingIconContainer} ${
-              !isLoadingMore.current ? "invisible" : ""
-            }`}
-          >
+        {(isLoadingMessages || isLoadingMore.current) && (
+          <div className={style.loadingIconContainer}>
             <CircleNotch
               size={20}
               className={`${style.loadingIcon} animate-spin `}

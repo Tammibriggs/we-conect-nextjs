@@ -76,7 +76,7 @@ function PagesNav({ rotate = false }: PagesNav) {
             {pathname === "" ? <OtherHouses /> : <OtherHousesOutlined />}
           </Link>
           <Link
-            href="/messaging"
+            href="/chat"
             className={`${style.pagesNav__action} ${style.remove}`}
             onClick={() => setLocationChanged(!locationChanged)}
           >

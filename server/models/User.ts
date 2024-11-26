@@ -11,8 +11,15 @@ const UserSchema = new Schema<UserSchema>(
     },
     password: {
       type: String,
-      required: true,
+      // required: true,
       min: 5,
+    },
+    provider: {
+      type: String,
+    },
+    providerId: {
+      type: String,
+      unique: true,
     },
     profilePicture: {
       url: {

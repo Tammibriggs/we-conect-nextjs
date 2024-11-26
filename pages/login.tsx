@@ -3,8 +3,10 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { CircleNotch } from "@phosphor-icons/react/dist/ssr";
-import { SignInResponse, signIn, useSession } from "next-auth/react";
+import { SignInResponse, signIn } from "next-auth/react";
 import Head from "next/head";
+import { Button } from "@mui/material";
+import { GoogleLogo } from "@phosphor-icons/react";
 
 export default function Login() {
   const router = useRouter();
@@ -37,6 +39,19 @@ export default function Login() {
         <title>Login</title>
       </Head>
       <form className={style.authForm} onSubmit={handleSubmit}>
+        <h3>Sign In</h3>
+        <Button
+          component="div"
+          className={style.authGoogle}
+          onClick={() => signIn("google", { redirect: false })}
+        >
+          <GoogleLogo size={20} />
+          <span>Sign In with Google</span>
+        </Button>
+        <span className={style.authAlternative}>
+          <span>OR</span>
+          <hr />
+        </span>
         <input
           type="text"
           placeholder="Username"

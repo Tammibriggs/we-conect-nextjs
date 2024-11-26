@@ -22,7 +22,7 @@
 .messaging .message__searchPal {
   margin-bottom: 15px;
 }
- 
+
 .messaging .message__searchPalImage {
   width: 8vw;
   height: 8vw;
@@ -37,7 +37,11 @@
   min-height: 50px;
 }
 
-@media(min-width: 500px) {
+.messaging .customChatContainer {
+  height: 100vh;
+}
+
+@media (min-width: 500px) {
   .messaging .message {
     min-height: 100vh;
     padding-bottom: 20px;

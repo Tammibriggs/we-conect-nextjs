@@ -3,8 +3,9 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { SignInResponse, signIn } from "next-auth/react";
-import { CircleNotch } from "@phosphor-icons/react";
+import { CircleNotch, GoogleLogo } from "@phosphor-icons/react";
 import Head from "next/head";
+import { Button } from "@mui/material";
 
 export default function SignUp() {
   const router = useRouter();
@@ -67,6 +68,18 @@ export default function SignUp() {
       </Head>
       <form className={style.authForm} onSubmit={handleSubmit}>
         <h3>Sign Up</h3>
+        <Button
+          component="div"
+          className={style.authGoogle}
+          onClick={() => signIn("google", { redirect: false })}
+        >
+          <GoogleLogo size={20} />
+          <span>Sign Up with Google</span>
+        </Button>
+        <span className={style.authAlternative}>
+          <span>OR</span>
+          <hr />
+        </span>
         <input
           type="text"
           value={inputs.username}

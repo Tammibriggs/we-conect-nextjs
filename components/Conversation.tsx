@@ -27,7 +27,7 @@ function Conversation({
   const router = useRouter();
 
   const startConversation = async () => {
-    if (router.pathname === "/chat") {
+    if (router.pathname.includes("/chat")) {
       router.push(`/chat/${_id}`, undefined, { shallow: true });
     } else {
       setCurrentConversationId(_id);
