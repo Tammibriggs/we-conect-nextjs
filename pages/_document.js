@@ -7,7 +7,7 @@ export default function Document() {
       <Head>
         <ColorSchemeScript defaultColorScheme="auto" />
       </Head>
-      <body>
+      <body style={{backgroundColor:"var(--p-color9)"}}>
         <Main />
         <NextScript />
       </body>

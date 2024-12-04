@@ -63,6 +63,15 @@
   margin-top: 10px;
 }
 
+.chat .fixedForm {
+  position: fixed;
+  bottom: 10px;
+  width: 96%;
+  margin: 0 auto;
+  background-color: white;
+  padding-top: 10px;
+}
+
 .chat form button {
   background-color: var(--p-color1);
   padding: 5px 10px;

@@ -83,11 +83,11 @@ function PagesNav({ rotate = false }: PagesNav) {
             {pathname === "messaging" ? <Email /> : <EmailOutlined />}
           </Link>
           <Link
-            href="/followers"
+            href="/follow/followers"
             className={`${style.pagesNav__action} ${style.pageNav__follow}`}
             onClick={() => setLocationChanged(!locationChanged)}
           >
-            {pathname === "followers" ? <PeopleAlt /> : <PeopleAltOutlined />}
+            {pathname === "/follow/followers" ? <PeopleAlt /> : <PeopleAltOutlined />}
           </Link>
           <span
             className={style.pagesNav__action}

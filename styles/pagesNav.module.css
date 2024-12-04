@@ -25,6 +25,7 @@
   flex: 1;
   padding: 1rem 0.25rem 0.25rem 0.25rem;
   background-color: #eaf3fc;
+  width: 100%;
 }
 
 .pagesNav__Icon {

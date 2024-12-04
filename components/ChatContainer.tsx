@@ -7,7 +7,7 @@ import {
 } from "../redux/services/messaging";
 import { socket } from "@/utils/socket";
 import { useSession } from "next-auth/react";
-import { MagnifyingGlass } from "@phosphor-icons/react";
+import { ArrowLeft, MagnifyingGlass } from "@phosphor-icons/react";
 import ChatSearchResult from "./ChatSearchResult";
 import Image from "next/image";
 import Conversation from "./Conversation";
@@ -17,6 +17,7 @@ import {
   setConversations,
   setOnlineUsers,
 } from "@/redux/chatSlice";
+import { useRouter } from "next/router";
 
 export default function ChatContainer({
   urlConversationId,
@@ -25,6 +26,7 @@ export default function ChatContainer({
   urlConversationId?: string;
   customStyle?: string;
 }) {
+  const router = useRouter()
   const dispatch = useDispatch();
   const conversations = useSelector(selectConversations);
   const { data: sessionData } = useSession() as ClientSession;
@@ -128,7 +130,10 @@ export default function ChatContainer({
     <div className={`${style.chatContainer} ${customStyle}`}>
       {!currentConversationId ? (
         <>
-          <h3>Messages</h3>
+          <div className={style.chatContainerHead}>
+            {router.pathname.includes('chat') && <ArrowLeft size={30} onClick={() => router.back()} />}
+            <h3>Messages</h3>
+          </div>
           <div className="noButtonSearch">
             <MagnifyingGlass size={20} />
             <input

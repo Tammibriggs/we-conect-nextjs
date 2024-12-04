@@ -11,6 +11,7 @@ import OnlineIndicator from "./OnlineIndicator";
 import { IconButton } from "@mui/material";
 import Message from "./Message";
 import { CaretLeft, CircleNotch } from "@phosphor-icons/react";
+import { useRouter } from "next/router";
 
 function ChatWindow({
   conversation,
@@ -18,6 +19,7 @@ function ChatWindow({
   setCurrentConversationId,
 }: ChatWindow) {
   const LIMIT = 20;
+  const router = useRouter();
   const dispatch = useDispatch();
   const isInFlight = useRef<boolean>();
   const inputRef = useRef<HTMLSpanElement>();
@@ -386,14 +388,17 @@ function ChatWindow({
     setLastMessageElementId,
   ]);
 
+  const handleLeaveChatWindow = () => {
+    setCurrentConversationId("");
+    if (router.pathname.includes("chat")) {
+      router.back();
+    }
+  };
+
   return (
     <div className={style.chat}>
       <div className={style.chat__head}>
-        <CaretLeft
-          onClick={() => setCurrentConversationId("")}
-          size={25}
-          weight="bold"
-        />
+        <CaretLeft onClick={handleLeaveChatWindow} size={25} weight="bold" />
         <div className={style.chat__profile}>
           <Image
             src={
@@ -426,7 +431,7 @@ function ChatWindow({
 
         {displayMessages}
       </div>
-      <form>
+      <form className={router.pathname.includes("chat") ? style.fixedForm : ""}>
         <span
           className={style.textarea}
           role="textbox"
