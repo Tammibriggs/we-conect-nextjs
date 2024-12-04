@@ -1,4 +1,5 @@
 import User from "@/server/models/User";
+import { checkUsername } from "@/server/utils";
 import { connectDbWithoutHanlder } from "@/server/utils/mongodb";
 import { authShema } from "@/server/utils/yupSchemas";
 import CryptoJS from "crypto-js";
@@ -61,7 +62,6 @@ const authOptions: NextAuthOptions = {
 
           return null;
         } catch (err) {
-          console.log(err);
           return null;
         }
       },
@@ -76,8 +76,12 @@ const authOptions: NextAuthOptions = {
           const userDoc = await User.findOne({ providerId: id });
 
           if (!userDoc) {
+            let username = name.split(" ")[0]
+            const result = await checkUsername(username)
+            if(result.exists) username = result.suggestedUsername
+
             await User.create({
-              username: name.split(" ")[0],
+              username,
               providerId: id,
               profilePicture: {
                 url: image,

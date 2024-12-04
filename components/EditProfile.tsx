@@ -11,6 +11,7 @@ import {
 } from "firebase/storage";
 import { storage } from "../firebase";
 import style from "../styles/profileCard.module.css";
+import { toast } from "react-toastify";
 
 function EditProfile({
   setIsEditOpen,
@@ -104,7 +105,18 @@ function EditProfile({
       payload.bio = inputs.bio;
     }
 
-    if (payload) await updateUser(payload);
+    if (payload) {
+      const res = await updateUser(payload);
+      if (res.error) {
+        let message = "Something went wrong";
+        if ("status" in res.error && res.error.status === 403)
+          message =
+            "message" in (res.error.data as { message?: string })
+              ? JSON.stringify((res.error.data as { message?: string }).message)
+              : "";
+        toast.error(message);
+      }
+    }
 
     setEditIsLoading(false);
 

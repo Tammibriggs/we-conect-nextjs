@@ -1,13 +1,13 @@
-import User from "@/server/models/User";
+import { checkUsername } from "@/server/utils";
 import connectDB from "@/server/utils/mongodb";
 
-const checkUsername = async (req, res) => {
+const handleCheckUsername = async (req, res) => {
   try {
     const { username } = req.body;
-    const user = await User.findOne({ username });
+    const result = await checkUsername(username)
 
-    if (user) {
-      return res.status(409).json({ message: "Username already exists" });
+    if (result.exists) {
+      return res.status(409).json({ message: "Username already exists", suggestedUsername: result.suggestedUsername });
     }
 
     return res.status(200).json({ message: "ok" });
@@ -19,7 +19,7 @@ const checkUsername = async (req, res) => {
 
 const handler = async (req, res) => {
   if (req.method === "POST") {
-    await checkUsername(req, res);
+    await handleCheckUsername(req, res);
   } else {
     res.status(405).send("Method Not Allowed");
   }

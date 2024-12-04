@@ -4,6 +4,7 @@ import { hasDisallowedFields } from "@/server/utils";
 import verifySession from "@/server/utils/verifySession";
 import { NextApiResponse } from "next";
 import { updateUserSchema } from "@/server/utils/yupSchemas";
+import { MongooseError } from "mongoose";
 
 const updateUser = async (req: CustomNextApiRequest, res: NextApiResponse) => {
   try {
@@ -12,7 +13,6 @@ const updateUser = async (req: CustomNextApiRequest, res: NextApiResponse) => {
     let disAllowedFields = [""];
 
     if (hasDisallowedFields(req.body, disAllowedFields)) {
-      console.log("reached");
       return res.status(422).json({
         message:
           'Only the "username", "bio", "profilePicture", "coverPicture" fields are allowed.',
@@ -25,6 +25,9 @@ const updateUser = async (req: CustomNextApiRequest, res: NextApiResponse) => {
     });
     res.status(200).json({ message: "ok" });
   } catch (err) {
+    if(err?.keyPattern) {
+      return res.status(403).json({ message: 'Username already exists' });
+    }
     return res.status(500).json({ message: "Interanl Server Error" });
   }
 };

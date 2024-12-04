@@ -6,6 +6,15 @@ import "@mantine/core/styles.css";
 import "@/styles/globals.css";
 import { SessionProvider } from "next-auth/react";
 import MemoryUsage from "@/components/MemoryUsage";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import ReactGA from "react-ga4";
+
+const GA_ANALYTICS_ID = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID
+
+if (process.env.NODE_ENV === 'production' && GA_ANALYTICS_ID) {
+  ReactGA.initialize(GA_ANALYTICS_ID);
+}
 
 export default function App({
   Component,
@@ -23,8 +32,8 @@ export default function App({
               setModalOpened={setModalOpened}
               modalOpened={modalOpened}
             />
-            <MemoryUsage />
-
+              <ToastContainer />
+            {/* <MemoryUsage /> */}
           </MantineProvider>
         </SessionProvider>
       </Providers>
